@@ -56,6 +56,17 @@ The Pet Adoption and Rescue Platform is a web application designed to facilitate
 
 By adhering to these project requirements, the Pet Adoption and Rescue Platform aims to streamline the pet adoption process, connect adopters with pets in need of homes, and provide a user-friendly experience for both adopters and rescue organizations.
 
----
+## Additional Resources
 
-You can copy this content into a markdown file (e.g., `project_summary.md`) and include it in your GitHub repository to provide an overview of your project to potential contributors, collaborators, and users.
+- [Pet Adoption and Rescue Platform](https://github.com/abhishektiwari/pet-adoption-and-rescue-platform)
+- [Pet Adoption and Rescue Platform README](https://github.com/abhishektiwari/pet-adoption-and-rescue-platform/blob/main/README.md)
+
+## Contributors
+
+- [zobaidulkazi](https://github.com/zobaidulkazi64)
+
+## License
+
+MIT License
+
+Copyright (c) 2023 zobaidulkazi
