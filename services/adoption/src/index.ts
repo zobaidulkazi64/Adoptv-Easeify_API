@@ -14,9 +14,17 @@ app.get("/health", (_req, res) => {
   res.status(200).json({ status: "UP" });
 });
 
-
 // routes
 
+app.get("/", (_req, res) => {
+  res.status(200).json({ message: "Adoption service is up and running!" });
+});
+
+// 500 handler
+app.use((err, _req, res, _next) => {
+  console.error(err.stack);
+  res.status(500).json({ message: "Internal server error" });
+});
 
 // 404 handler
 app.use((_req, res) => {

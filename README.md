@@ -2,6 +2,8 @@
 
 ## Overview
 
+- **Pet Adoption and Rescue Platform**: A web application for pet adoption and rescue organizations to connect with potential adopters.
+
 The Pet Adoption and Rescue Platform is a web application designed to facilitate the adoption process for pets in need of homes. It serves as a marketplace where rescue organizations can list pets available for adoption, and potential adopters can browse listings, submit applications, and connect with rescue organizations.
 
 ## Application Functionalities
