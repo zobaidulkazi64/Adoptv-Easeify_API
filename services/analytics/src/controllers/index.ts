@@ -1,8 +1,5 @@
 import { Response, Request, NextFunction } from "express";
 
-AbortController.prototype.abort = function () {
-  // @ts-ignore
-  this._signal.aborted = true;
-  this._invokeAbort();
-  return this;
+export const abort = (req: Request, res: Response, next: NextFunction) => {
+  res.status(403).json({ message: "Forbidden" });
 };
