@@ -1,32 +1,32 @@
-import { Console } from "console";
 import { Request, Response, NextFunction } from "express";
-import z from "zod";
-import prisma from "../prisma";
+import { UserCreateSchema } from "@/schemas";
+import prisma from "@/prisma";
 
-const createUserSchema = z.object({
-  name: z.string(),
-  email: z.string().email(),
-  password: z.string().min(6),
-});
-
-const createUser =
-  () => async (req: Request, res: Response, next: NextFunction) => {
-    // validate request body
-    const parseBody = createUserSchema.safeParse(req.body);
-
-    if (!parseBody.success) {
-      return res.status(400).json({
-        message: "Invalid request body",
-        error: parseBody.error,
-      });
+const createUser = async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    // Validate the request body
+    const parsedBody = UserCreateSchema.safeParse(req.body);
+    if (!parsedBody.success) {
+      return res.status(400).json({ message: parsedBody.error.errors });
     }
 
-    // create user
+    // check if the authUserId already exists
+    const existingUser = await prisma.user.findUnique({
+      where: { authUserId: parsedBody.data.authUserId },
+    });
+    if (existingUser) {
+      return res.status(400).json({ message: "User already exists" });
+    }
+
+    // Create a new user
     const user = await prisma.user.create({
-      data: parseBody.data,
+      data: parsedBody.data,
     });
 
     return res.status(201).json(user);
-  };
+  } catch (error) {
+    next(error);
+  }
+};
 
 export default createUser;
