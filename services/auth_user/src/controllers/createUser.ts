@@ -1,5 +1,7 @@
+import { Console } from "console";
 import { Request, Response, NextFunction } from "express";
 import z from "zod";
+import prisma from "../prisma";
 
 const createUserSchema = z.object({
   name: z.string(),
@@ -7,17 +9,24 @@ const createUserSchema = z.object({
   password: z.string().min(6),
 });
 
-export async function createUser(
-  req: Request,
-  res: Response,
-  next: NextFunction
-) {
-  try {
-    const paresBody = createUserSchema.parseAsync(req.body);
+const createUser =
+  () => async (req: Request, res: Response, next: NextFunction) => {
+    // validate request body
+    const parseBody = createUserSchema.safeParse(req.body);
 
-    console.log(paresBody);
-  } catch (error) {
-    next(error);
-    console.log(error);
-  }
-}
+    if (!parseBody.success) {
+      return res.status(400).json({
+        message: "Invalid request body",
+        error: parseBody.error,
+      });
+    }
+
+    // create user
+    const user = await prisma.user.create({
+      data: parseBody.data,
+    });
+
+    return res.status(201).json(user);
+  };
+
+export default createUser;
