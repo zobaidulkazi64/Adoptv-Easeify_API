@@ -2,8 +2,10 @@
   "name": "root",
   "private": true,
   "workspaces": [
+    "services/*",
+    "apiGateway/*",
     "packages/*",
-    "services/*"
+    "workspaces/*"
   ],
   "scripts": {
     "build": " yarn lerna run build",
